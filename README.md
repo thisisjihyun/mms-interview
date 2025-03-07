@@ -24,3 +24,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - SSR to make the initial render faster? what about the rest
 - loading every time 
     - loading skeleton 
+- Prevent when going back to the previous page
