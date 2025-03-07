@@ -1,23 +1,15 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## MediaMarktSturn Interview _ Jihyun Hwang
 
 ## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
+### `npm run start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm test`
-
+### `npm run test`
 ### `npm run build`
 
 ## Decision logs
 - Dynamic Search (real time search) VS Submit-based Search
-- exact matching or not in the search term
+- Exact matching or losely matching in the search term
 
 
 ## Things to improve 

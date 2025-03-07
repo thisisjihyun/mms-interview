@@ -3,15 +3,12 @@ import { useQuery } from "@apollo/client";
 import {
   Container,
   Form,
-  Input,
-  StyledLink,
   ResultsContainer,
-  ResultsList,
-  ResultsItem,
   Message,
-  Label,
 } from "../styles/SearchForm.styles";
 import { GET_ISSUES } from "../graphql/queries";
+import SearchInput from "./SearchInput";
+import IssueList from "./IssueList";
 
 const SearchForm: React.FC = () => {
   const [status, setStatus] = useState<string>("all");
@@ -85,28 +82,12 @@ const SearchForm: React.FC = () => {
   return (
     <Container>
       <Form>
-        <div>
-          <Label htmlFor="searchTerm">Search Term</Label>
-          <Input
-            type="text"
-            id="searchTerm"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search an issue"
-          />
-
-          <Label htmlFor="status">Status</Label>
-          <select
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="open">Open</option>
-            <option value="closed">Closed</option>
-          </select>
-        </div>
-
+        <SearchInput
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          status={status}
+          setStatus={setStatus}
+        />
         {loading && <Message>Loading...</Message>}
         {error && <Message>Error: {error.message}</Message>}
         {!loading && !error && issues.length === 0 && (
@@ -114,26 +95,7 @@ const SearchForm: React.FC = () => {
         )}
 
         <ResultsContainer ref={containerRef}>
-          <ResultsList>
-            {issues.map((edge: any) => (
-              <ResultsItem key={edge.node.number}>
-                <a
-                  href={edge.node.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {edge.node.title}
-                </a>
-                <p>Status: {edge.node.state}</p>
-                <StyledLink
-                  to={`/result/${edge.node.number}`}
-                  state={edge.node}
-                >
-                  View Issue
-                </StyledLink>
-              </ResultsItem>
-            ))}
-          </ResultsList>
+          <IssueList issues={issues} />
         </ResultsContainer>
       </Form>
     </Container>
