@@ -4,6 +4,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: whitesmoke;
-  padding: 0 120px;
+  padding: 0 5rem;
   margin: 0;
+  height: 100%;
+  min-height: 100vh;
+
+  @media (max-width: 375px) {
+    padding: 0 2rem;
 `;

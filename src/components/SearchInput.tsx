@@ -1,4 +1,4 @@
-import { Input, Label } from "../styles/SearchForm.styles";
+import { Input, Label, Select } from "../styles/SearchForm.styles";
 import { SearchInputProps } from "../types";
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -8,7 +8,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   setStatus,
 }) => {
   return (
-    <>
+    <div>
       <Label htmlFor="searchTerm">Search Term</Label>
       <Input
         type="text"
@@ -19,7 +19,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       />
 
       <Label htmlFor="status">Status</Label>
-      <select
+      <Select
         id="status"
         value={status}
         onChange={(e) => setStatus(e.target.value)}
@@ -27,8 +27,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
         <option value="all">All</option>
         <option value="open">Open</option>
         <option value="closed">Closed</option>
-      </select>
-    </>
+      </Select>
+    </div>
   );
 };
 

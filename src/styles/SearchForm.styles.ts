@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -28,11 +28,20 @@ export const Label = styled.label`
   margin: 0 0.5rem;
 `;
 
-export const Input = styled.input`
+const baseInputStyles = css`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+`;
+
+export const Input = styled.input`
+  ${baseInputStyles}
   width: 40%;
+`;
+
+export const Select = styled.select`
+  ${baseInputStyles}
+  width: auto;
 `;
 
 export const StyledLink = styled(Link)`
@@ -43,7 +52,7 @@ export const StyledLink = styled(Link)`
   border-radius: 5px;
 
   &:hover {
-   background-color: lightgreen;
+    background-color: lightgreen;
   }
 `;
 
