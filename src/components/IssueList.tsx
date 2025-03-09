@@ -3,19 +3,7 @@ import {
   ResultsList,
   StyledLink,
 } from "../styles/SearchForm.styles";
-
-interface IssueItemProps {
-  issue: {
-    number: number;
-    title: string;
-    url: string;
-    state: string;
-  };
-}
-
-interface IssueListProps {
-  issues: IssueItemProps[];
-}
+import { IssueListProps } from "../types";
 
 const IssueList: React.FC<IssueListProps> = ({ issues }) => {
   return (

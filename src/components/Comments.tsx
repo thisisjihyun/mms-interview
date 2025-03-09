@@ -1,24 +1,15 @@
 import React from "react";
-
-interface CommentsProps {
-  comments: Array<{
-    createdAt: string;
-    author: {
-      login: string;
-    };
-    body: string;
-  }>;
-}
+import { CommentsProps } from "../types";
 
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
   return (
     <>
       {comments?.length > 0 ? (
         <ul>
-          {comments?.map((comment: any) => (
-            <li key={comment.createdAt}>
-              <strong>{comment.author.login}</strong> - {comment.createdAt}
-              <p>{comment.body}</p>
+          {comments?.map(({ createdAt, author, body }) => (
+            <li key={createdAt}>
+              <strong>{author.login}</strong> - {createdAt}
+              <p>{body}</p>
             </li>
           ))}
         </ul>
