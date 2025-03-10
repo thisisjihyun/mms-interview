@@ -9,7 +9,7 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
         <ul>
           {comments?.map(({ createdAt, author, body }, index) => (
             <li key={index}>
-              <strong>{author.login}</strong> - {getTimeAgo(createdAt)}
+              <strong>{author?.login}</strong> - {getTimeAgo(createdAt)}
               <p>{body}</p>
             </li>
           ))}

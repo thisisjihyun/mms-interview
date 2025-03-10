@@ -18,7 +18,7 @@ const IssueList: React.FC<IssueListProps> = ({ issues }) => {
             </a>
             <p>Status: {state}</p>
             <p>
-              #{number} {author.login}{" "}
+              #{number} {author?.login}{" "}
               {state === "OPEN" ? "opened" : "was closed"} by {""}
               {getTimeAgo(createdAt)}
             </p>
