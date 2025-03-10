@@ -1,5 +1,6 @@
 import React from "react";
 import { CommentsProps } from "../types";
+import { getTimeAgo } from "../utils/getTimeAgo";
 
 const Comments: React.FC<CommentsProps> = ({ comments }) => {
   return (
@@ -7,8 +8,8 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
       {comments?.length > 0 ? (
         <ul>
           {comments?.map(({ createdAt, author, body }) => (
-            <li key={createdAt}>
-              <strong>{author.login}</strong> - {createdAt}
+            <li key={getTimeAgo(createdAt)}>
+              <strong>{author.login}</strong> - {getTimeAgo(createdAt)}
               <p>{body}</p>
             </li>
           ))}
