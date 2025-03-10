@@ -7,8 +7,8 @@ const Comments: React.FC<CommentsProps> = ({ comments }) => {
     <>
       {comments?.length > 0 ? (
         <ul>
-          {comments?.map(({ createdAt, author, body }) => (
-            <li key={getTimeAgo(createdAt)}>
+          {comments?.map(({ createdAt, author, body }, index) => (
+            <li key={index}>
               <strong>{author.login}</strong> - {getTimeAgo(createdAt)}
               <p>{body}</p>
             </li>

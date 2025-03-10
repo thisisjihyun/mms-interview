@@ -9,10 +9,10 @@ import { getTimeAgo } from "../utils/getTimeAgo";
 const IssueList: React.FC<IssueListProps> = ({ issues }) => {
   return (
     <ResultsList>
-      {issues.map(({ node }: any) => {
+      {issues.map(({ node }: any, index) => {
         const { number, title, url, state, createdAt, author } = node;
         return (
-          <ResultsItem key={number}>
+          <ResultsItem key={index}>
             <a href={url} target="_blank" rel="noopener noreferrer">
               {title}
             </a>
