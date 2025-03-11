@@ -15,7 +15,7 @@ const DetailsPage: React.FC = () => {
     error,
     fetchFullIssue,
     issueData,
-    issueNumber
+    issueNumber,
   } = DetailsHooks();
 
   useInfiniteScroll(containerRef, loadMore, loading, [data]);

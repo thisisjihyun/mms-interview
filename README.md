@@ -29,3 +29,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser
 - Implement a loading skeleton UI
 - Persist state when navigating back to Home from Detail to prevent redundant calls
 - Caching for commonly used search terms
+- Add unit and E2E test

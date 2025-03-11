@@ -5,7 +5,7 @@ import client from "./ApolloClient";
 
 import SearchForm from "./components/SearchForm";
 import NotFoundPage from "./components/NotFoundPage";
-import DetailsPage from "./components/DetailsPage";
+import Details from "./components/Details";
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <h1>GitHub Issues Search</h1>
       <Router>
         <Routes>
-          <Route path="/result/:issueNumber" element={<DetailsPage />} />
+          <Route path="/result/:issueNumber" element={<Details />} />
           <Route path="/" element={<SearchForm />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

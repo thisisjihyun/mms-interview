@@ -9,7 +9,6 @@ const useSearchForm = () => {
   const [debouncedTerm, setDebouncedTerm] = useState<string>("");
   const [issues, setIssues] = useState<any[]>([]);
   const [afterCursor, setAfterCursor] = useState<string | null>(null);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Debounce the search term to prevent too many requests
