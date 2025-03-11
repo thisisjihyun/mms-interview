@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ISSUES } from "../graphql/queries";
+import useInfiniteScroll from "./useInfiniteScroll";
 
 const useSearchForm = () => {
   const [status, setStatus] = useState<string>("all");
@@ -51,22 +52,7 @@ const useSearchForm = () => {
     }
   };
 
-  // Handle scroll to load more issues
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      if (loading) return;
-      const { scrollTop, scrollHeight, clientHeight } = container;
-      if (scrollTop + clientHeight >= scrollHeight - 100) {
-        loadMore();
-      }
-    };
-
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [data, loading]);
+  useInfiniteScroll(containerRef, loadMore, loading, [data]);
 
   return {
     issues,
@@ -77,6 +63,8 @@ const useSearchForm = () => {
     status,
     setStatus,
     containerRef,
+    loadMore,
+     data
   };
 };
 

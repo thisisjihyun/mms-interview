@@ -14,6 +14,6 @@ export const Container = styled.div`
 `;
 
 export const CommentsContainer = styled.div`
-  overflowy: auto;
-  maxheight: 60vh;
+  overflow-y: auto;
+  max-height: 60vh;
 `;
