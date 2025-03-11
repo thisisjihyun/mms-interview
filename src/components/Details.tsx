@@ -1,11 +1,11 @@
 import React from "react";
 
 import Comments from "./Comments";
-import { Container, CommentsContainer } from "../styles/DetailsPage.styles";
+import { Container, CommentsContainer } from "../styles/Details.styles";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
 import DetailsHooks from "../hooks/DetailsHooks";
 
-const DetailsPage: React.FC = () => {
+const Details: React.FC = () => {
   const {
     commentsData,
     data,
@@ -49,4 +49,4 @@ const DetailsPage: React.FC = () => {
   );
 };
 
-export default DetailsPage;
+export default Details;
