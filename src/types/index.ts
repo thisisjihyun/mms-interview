@@ -25,5 +25,6 @@ export interface CommentsProps {
       login: string;
     };
     body: string;
+    pageInfo: any;
   }>;
 }

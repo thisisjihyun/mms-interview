@@ -1,38 +1,76 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import Comments from "./Comments";
 import { GET_ISSUE_AND_COMMENTS, GET_COMMENTS } from "../graphql/queries";
-import { Container } from "../styles/DetailsPage.styles";
+import { Container, CommentsContainer } from "../styles/DetailsPage.styles";
 
 const DetailsPage: React.FC = () => {
   const { issueNumber } = useParams();
   const location = useLocation();
   const issueData = location.state;
-
+  const [afterCursor, setAfterCursor] = useState<string | null>(null);
   const parsedIssueNumber = useMemo(
     () => (issueNumber ? parseInt(issueNumber, 10) : NaN),
     [issueNumber]
   );
-
-  const fetchFullIssue = !issueData; 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const fetchFullIssue = !issueData;
   const query = fetchFullIssue ? GET_ISSUE_AND_COMMENTS : GET_COMMENTS;
 
-  const { loading, error, data } = useQuery(query, {
+  const [commentsData, setCommentsData] = useState<any[]>([]);
+
+  const { loading, error, data, fetchMore } = useQuery(query, {
     variables: isNaN(parsedIssueNumber)
       ? undefined
-      : { number: parsedIssueNumber },
+      : { number: parsedIssueNumber, first: 10, after: afterCursor },
     skip: isNaN(parsedIssueNumber),
     fetchPolicy: "cache-first",
   });
 
-  if (loading) return <p>Loading...</p>;
+
+  useEffect(() => {
+    if (data?.repository?.issue?.comments?.nodes) {
+      setCommentsData((prevComments) => [
+        ...prevComments,
+        ...data?.repository?.issue?.comments?.nodes,
+      ]);
+    }
+  }, [data]);
+
+  const loadMore = () => {
+    if (data?.repository?.issue?.comments?.pageInfo?.hasNextPage) {
+      const newCursor = data.repository?.issue.comments.pageInfo.endCursor;
+      setAfterCursor(newCursor);
+      fetchMore({
+        variables: {
+          after: newCursor,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) return;
+
+    const handleScroll = () => {
+      if (loading) return;
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
+        loadMore();
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [data, loading]);
+
   if (error) return <p>Error: {error.message}</p>;
 
-  const issue = fetchFullIssue ? data.repository.issue : issueData;
-  const comments = data?.repository?.issue?.comments?.nodes || [];
-
+  const issue = fetchFullIssue ? data.repository?.issue : issueData;
   return (
     <Container>
       <h2>Issue #{issueNumber} Detail</h2>
@@ -47,7 +85,9 @@ const DetailsPage: React.FC = () => {
       </p>
 
       <h3>Comments</h3>
-      <Comments comments={comments} />
+      <CommentsContainer ref={containerRef}>
+        <Comments comments={commentsData} />
+      </CommentsContainer>
     </Container>
   );
 };

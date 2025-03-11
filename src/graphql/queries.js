@@ -27,7 +27,7 @@ export const GET_ISSUES = gql`
 `;
 
 export const GET_ISSUE_AND_COMMENTS = gql`
-  query GetIssueAndComments($number: Int!) {
+  query GetIssueAndComments($number: Int!, $first: Int, $after: String) {
     repository(owner: "facebook", name: "react") {
       issue(number: $number) {
         title
@@ -38,13 +38,17 @@ export const GET_ISSUE_AND_COMMENTS = gql`
         author {
           login
         }
-        comments(first: 10) {
+        comments(first: $first, after: $after) {
           nodes {
             author {
               login
             }
             body
             createdAt
+          }
+          pageInfo {
+            endCursor
+            hasNextPage
           }
         }
       }
@@ -53,16 +57,20 @@ export const GET_ISSUE_AND_COMMENTS = gql`
 `;
 
 export const GET_COMMENTS = gql`
-  query GetComments($number: Int!) {
+  query GetComments($number: Int!, $first: Int, $after: String) {
     repository(owner: "facebook", name: "react") {
       issue(number: $number) {
-        comments(first: 10) {
+        comments(first: $first, after: $after) {
           nodes {
             author {
               login
             }
             body
             createdAt
+          }
+          pageInfo {
+            endCursor
+            hasNextPage
           }
         }
       }

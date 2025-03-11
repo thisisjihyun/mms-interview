@@ -12,3 +12,8 @@ export const Container = styled.div`
   @media (max-width: 375px) {
     padding: 0 2rem;
 `;
+
+export const CommentsContainer = styled.div`
+  overflowy: auto;
+  maxheight: 60vh;
+`;
