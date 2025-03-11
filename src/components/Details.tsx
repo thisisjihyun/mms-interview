@@ -1,24 +1,12 @@
 import React from "react";
 
 import Comments from "./Comments";
-import { Container, CommentsContainer } from "../styles/Details.styles";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import { Container } from "../styles/Details.styles";
 import DetailsHooks from "../hooks/DetailsHooks";
 
 const Details: React.FC = () => {
-  const {
-    commentsData,
-    data,
-    containerRef,
-    loadMore,
-    loading,
-    error,
-    fetchFullIssue,
-    issueData,
-    issueNumber,
-  } = DetailsHooks();
-
-  useInfiniteScroll(containerRef, loadMore, loading, [data]);
+  const { data, loading, error, fetchFullIssue, issueData, issueNumber } =
+    DetailsHooks();
 
   if (loading) {
     return <></>;
@@ -40,11 +28,7 @@ const Details: React.FC = () => {
       <p>
         <strong>Body:</strong> {issue.body}
       </p>
-
-      <h3>Comments</h3>
-      <CommentsContainer ref={containerRef}>
-        <Comments comments={commentsData} />
-      </CommentsContainer>
+      <Comments />
     </Container>
   );
 };

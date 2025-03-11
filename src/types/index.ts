@@ -17,14 +17,3 @@ export interface IssueItemProps {
 export interface IssueListProps {
   issues: IssueItemProps[];
 }
-
-export interface CommentsProps {
-  comments: Array<{
-    createdAt: string;
-    author: {
-      login: string;
-    };
-    body: string;
-    pageInfo: any;
-  }>;
-}
