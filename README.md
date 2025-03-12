@@ -34,9 +34,9 @@ Users can ...
 - Exact or loose matching in the search term
 2. Pagination
 - Scroll based pagination for both a list of issues and comments (Hooks)
-- Fetching strategy for Detail Page
+- Fetching strategy for Detail page
     - If users navigate from Home, reuse the data and only fetch comments (e.g. query GetComments)
-    - If users directly access to this page, fetch both the issue and comments
+    - If users directly access to this page, fetch both the issue and comments (e.g. query GetIssuesAndComments)
 3. Modularize into separate hook and UI components
 4. Reusable functionality
     - Human redable timestamp
