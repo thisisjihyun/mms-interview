@@ -1,20 +1,37 @@
 import { gql } from "@apollo/client";
 
+const ISSUE_FIELDS = gql`
+  fragment IssueFields on Issue {
+    title
+    body
+    number
+    state
+    url
+    createdAt
+    author {
+      login
+    }
+  }
+`;
+
+const COMMENT_FIELDS = gql`
+  fragment CommentFields on IssueComment {
+    author {
+      login
+    }
+    body
+    createdAt
+  }
+`;
+
 export const GET_ISSUES = gql`
-  query getIssues($searchTerm: String!, $first: Int, $after: String) {
+  ${ISSUE_FIELDS}
+  query GetIssues($searchTerm: String!, $first: Int, $after: String) {
     search(query: $searchTerm, type: ISSUE, first: $first, after: $after) {
       edges {
         node {
           ... on Issue {
-            title
-            body
-            number
-            state
-            url
-            createdAt
-            author {
-              login
-            }
+            ...IssueFields
           }
         }
       }
@@ -27,24 +44,15 @@ export const GET_ISSUES = gql`
 `;
 
 export const GET_ISSUE_AND_COMMENTS = gql`
+  ${ISSUE_FIELDS}
+  ${COMMENT_FIELDS}
   query GetIssueAndComments($number: Int!, $first: Int, $after: String) {
     repository(owner: "facebook", name: "react") {
       issue(number: $number) {
-        title
-        body
-        state
-        createdAt
-        body
-        author {
-          login
-        }
+        ...IssueFields
         comments(first: $first, after: $after) {
           nodes {
-            author {
-              login
-            }
-            body
-            createdAt
+            ...CommentFields
           }
           pageInfo {
             endCursor
@@ -57,16 +65,13 @@ export const GET_ISSUE_AND_COMMENTS = gql`
 `;
 
 export const GET_COMMENTS = gql`
+  ${COMMENT_FIELDS}
   query GetComments($number: Int!, $first: Int, $after: String) {
     repository(owner: "facebook", name: "react") {
       issue(number: $number) {
         comments(first: $first, after: $after) {
           nodes {
-            author {
-              login
-            }
-            body
-            createdAt
+            ...CommentFields
           }
           pageInfo {
             endCursor
