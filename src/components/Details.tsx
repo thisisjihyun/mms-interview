@@ -12,7 +12,7 @@ const Details: React.FC = () => {
     return <></>;
   }
 
-  if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>There is no matching issue. Please try again.</p>;
 
   const issue = fetchFullIssue ? data?.repository?.issue : issueData;
 

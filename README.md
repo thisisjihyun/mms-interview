@@ -41,6 +41,9 @@ Users can ...
 4. Reusable functionality
     - Human redable timestamp
     - Hooks for scroll based pagination 
+5. Error handling 
+    - When users search for an issue that does not exist on the Detail page.
+    - When users search for a term that does not match any issues on the Homepage.
 
 ## Things to improve 
 - Implement a loading skeleton UI
