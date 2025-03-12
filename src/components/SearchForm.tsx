@@ -34,6 +34,9 @@ const SearchForm: React.FC = () => {
         />
         {loading && <Message>Loading...</Message>}
         {error && <Message>Something went wrong. Please try again.</Message>}
+        {!loading && !error && issues.length === 0 && searchTerm && (
+          <Message>No matched results. Please try again.</Message>
+        )}
         <ResultsContainer ref={containerRef}>
           <IssueList issues={issues} />
         </ResultsContainer>

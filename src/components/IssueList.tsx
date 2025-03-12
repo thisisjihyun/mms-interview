@@ -7,10 +7,6 @@ import { IssueListProps } from "../types";
 import { getTimeAgo } from "../utils/getTimeAgo";
 
 const IssueList: React.FC<IssueListProps> = ({ issues }) => {
-  if (!issues.length) {
-    return <p>No matched issue. Please search again</p>;
-  }
-
   return (
     <ResultsList>
       {issues.map(({ node }: any, index) => {
