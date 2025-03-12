@@ -29,12 +29,12 @@ Users can ...
 
 ## Decision logs
 1. Search 
-- Dynamic Search (real time search) VS Submit-based Search
+- Dynamic search (real time search) VS Submit based Search
     - Debouncing
 - Exact or loose matching in the search term
 2. Pagination
-- Scroll-based Pagination for both a list of issues and comments (Reusuable hooks)
-- Fetching Strategy for Detail Page
+- Scroll based pagination for both a list of issues and comments (Hooks)
+- Fetching strategy for Detail Page
     - If users navigate from Home, reuse the data and only fetch comments (e.g. query GetComments)
     - If users directly access to this page, fetch both the issue and comments
 3. Modularize into separate hook and UI components

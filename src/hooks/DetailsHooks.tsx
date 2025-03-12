@@ -19,6 +19,7 @@ const DetailsHooks = () => {
   const fetchFullIssue = !issueData;
   const query = fetchFullIssue ? GET_ISSUE_AND_COMMENTS : GET_COMMENTS;
 
+  console.log('here calle')
   const { loading, error, data, fetchMore } = useQuery(query, {
     variables: isNaN(parsedIssueNumber)
       ? undefined
