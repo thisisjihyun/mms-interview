@@ -48,6 +48,6 @@ Users can ...
 ## Things to improve 
 - Implement a loading skeleton UI
 - Persist state when navigating back to Home from Detail to prevent redundant calls
-- Caching for commonly used search terms
+- Caching for commonly used search terms / Leverage Apollo Cache
 - Add unit and E2E test
 - Enable searchTerm with special characters (e.g. <, *, etc)
